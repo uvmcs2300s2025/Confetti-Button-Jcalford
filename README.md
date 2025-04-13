@@ -10,8 +10,8 @@ You may work individually or with a partner of your choosing.
 
 Use this Guided Project template to create a new repository (see [GitHub-with-CLion](https://github.com/uvmcs2300s2025/GitHub-with-CLion) repo for directions).
 **Your repository must be named with the convention: Confetti-Button-netid**, where netid is your UVM NetID username.
-* If you are collaborating, the format is Confetti-Button-netid1-netid2. Have one partner create the repository and give the other partner access on GitHub: on the repository page, go to the Settings tab, choose Manage Access, and add the person with their GitHub username.
-
+`* If you are collaborating, the format is Confetti-Button-netid1-netid2. Have one partner create the repository and give the other partner access on GitHub: on the repository page, go to the Settings tab, choose Manage Access, and add the person with their GitHub username.
+`
 Remember to commit and push frequently.
 
 # Requirements

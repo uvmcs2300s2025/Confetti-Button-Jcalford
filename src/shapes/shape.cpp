@@ -30,15 +30,11 @@ void Shape::initVBO() {
 void Shape::initEBO() {
     glGenBuffers(1, &EBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(float), indices.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
     // Don't unbind EBO because it's bound to VAO
 }
 
 void Shape::setUniforms() const {
-    // If you want to use a custom shader, you have to set it and call it's Use() function here.
-    // Since we are using the same shader for all shapes, we can just set it once in the constructor.
-    //this->shader.use();
-
     // Define the model matrix for the shape as a 4x4 identity matrix
     mat4 model = mat4(1.0f);
     // The model matrix is used to transform the vertices of the shape in relation to the world space.
@@ -52,11 +48,9 @@ void Shape::setUniforms() const {
 }
 
 bool Shape::isOverlapping(const vec2 &point) const {
-    // TODO: Implement
     // A shape is overlapping a point if the point is within the shape's bounding box.
-    // Hint: Even though getLeft, getRight, getTop, and getBottom aren't implemented
-    //       in this class, you can still call them from here.
-    return false; // Placeholder for compilation
+    return point.x >= getLeft() && point.x <= getRight() &&
+           point.y <= getTop() && point.y >= getBottom();
 }
 
 // Setters
@@ -67,32 +61,28 @@ void Shape::setPos(vec2 pos)          { this->pos = pos; }
 void Shape::setPosX(float x)          { pos.x = x; }
 void Shape::setPosY(float y)          { pos.y = y; }
 
-void Shape::setColor(struct color c)    { color = c; }
-void Shape::setColor(vec4 c)     { color.vec = c; }
-void Shape::setColor(vec3 c)     { color.vec = vec4(c, 1.0); }
-void Shape::setRed(float r)      { color.red = r; }
-void Shape::setGreen(float g)    { color.green = g; }
-void Shape::setBlue(float b)     { color.blue = b; }
-void Shape::setOpacity(float a)  { color.alpha = a; }
+void Shape::setColor(struct color c)  { color = c; }
+void Shape::setColor(vec4 c)          { color.vec = c; }
+void Shape::setColor(vec3 c)          { color.vec = vec4(c, 1.0); }
+void Shape::setRed(float r)           { color.red = r; }
+void Shape::setGreen(float g)         { color.green = g; }
+void Shape::setBlue(float b)          { color.blue = b; }
+void Shape::setOpacity(float a)       { color.alpha = a; }
 
-void Shape::setSize(vec2 size) { this->size = size; }
-void Shape::setSizeX(float x)  { size.x = x; }
-void Shape::setSizeY(float y)  { size.y = y; }
-
-void move(vec2 deltaPos);
-void moveX(float deltaWidth);
-void moveY(float deltaHeight);
+void Shape::setSize(vec2 size)        { this->size = size; }
+void Shape::setSizeX(float x)         { size.x = x; }
+void Shape::setSizeY(float y)         { size.y = y; }
 
 // Getters
-vec2 Shape::getPos() const      { return pos; }
-float Shape::getPosX() const    { return pos.x; }
-float Shape::getPosY() const    { return pos.y; }
-vec2 Shape::getSize() const     { return size; }
-vec3 Shape::getColor3() const   { return {color.red, color.green, color.blue}; }
-vec4 Shape::getColor4() const   { return color.vec; }
-float Shape::getRed() const     { return color.red; }
-float Shape::getGreen() const   { return color.green; }
-float Shape::getBlue() const    { return color.blue; }
-float Shape::getOpacity() const { return color.alpha; }
+vec2 Shape::getPos() const            { return pos; }
+float Shape::getPosX() const          { return pos.x; }
+float Shape::getPosY() const          { return pos.y; }
+vec2 Shape::getSize() const           { return size; }
+vec3 Shape::getColor3() const         { return {color.red, color.green, color.blue}; }
+vec4 Shape::getColor4() const         { return color.vec; }
+float Shape::getRed() const           { return color.red; }
+float Shape::getGreen() const         { return color.green; }
+float Shape::getBlue() const          { return color.blue; }
+float Shape::getOpacity() const       { return color.alpha; }
 
 void Shape::update(float deltaTime) {}
